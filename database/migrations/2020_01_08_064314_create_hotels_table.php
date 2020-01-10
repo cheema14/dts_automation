@@ -13,7 +13,7 @@ class CreateHotelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('hotels', function (Blueprint $table) {
+        Schema::table('hotels', function (Blueprint $table) {
             $table->bigIncrements('id')->autoIncrement();
             $table->string('hotel_name');
             $table->year('establishment_year');
@@ -29,9 +29,10 @@ class CreateHotelsTable extends Migration
             $table->integer('pra_no');
             $table->longText('pra_certificate');
             $table->string('official_email');
-            $table->unsignedInteger('business_idFk');
+            
+            //$table->unsignedBigInteger('business_idFk');
             // 'business_details' is the table name where business details are stored 
-            $table->foreign('business_idFk')->references('id')->on('business_detail_hotel')->onDelete('cascade');
+            //$table->foreign('business_idFk')->references('id')->on('business_detail_hotel')->onDelete('cascade');
 
             
             // Storing Manager's Personal information
@@ -78,8 +79,19 @@ class CreateHotelsTable extends Migration
             $table->date('renovation_date');
 
             //Storing facilities details
-            $table->unsignedBigInteger('facility_idFk');
+            // $table->unsignedBigInteger('facility_idFk');
+            // $table->foreign('facility_idFk')->references('id')->on('business_detail_hotel');
 
+            //Storing guest class
+            $table->string('guest_class');
+
+            //Storing peak season
+            $table->string('peak_season');
+
+            // Storing classification - Starts
+            $table->enum('classification', ['1 Start', '2 Star','3 Star','4 Star',
+                                            '5 Star','6 Star','7 Star']);
+                                            
             $table->timestamps();
         });
 

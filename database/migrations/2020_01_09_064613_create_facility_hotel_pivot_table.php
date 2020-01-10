@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateBusinessDetailHotelPivotTable extends Migration
+class CreateFacilityHotelPivotTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,13 @@ class CreateBusinessDetailHotelPivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('business_detail_hotel', function (Blueprint $table) {
-            $table->unsignedBigInteger('business_detail_id')->unsigned()->index();
-            $table->foreign('business_detail_id')->references('id')->on('business_details')->onDelete('cascade');
+        Schema::create('facility_hotel', function (Blueprint $table) {
+            $table->unsignedBigInteger('facility_id')->unsigned()->index();
+            $table->foreign('facility_id')->references('id')->on('facilities')->onDelete('cascade');
             $table->unsignedBigInteger('hotel_id')->unsigned()->index();
             $table->foreign('hotel_id')->references('id')->on('hotels')->onDelete('cascade');
-            $table->primary(['business_detail_id', 'hotel_id']);
+            $table->primary(['facility_id', 'hotel_id']);
+            $table->string('facility_charges');
         });
     }
 
@@ -28,6 +29,6 @@ class CreateBusinessDetailHotelPivotTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('business_detail_hotel');
+        Schema::dropIfExists('facility_hotel');
     }
 }
