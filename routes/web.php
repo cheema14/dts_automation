@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Auth::routes();
+//Auth::routes(['register' => false]);
+
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/','InceptiveController@select_registration')->name('registration_selection');
